@@ -33,7 +33,6 @@ packages:
 		"epub2txt-git" \
 		"eva-git" \
 		"flutter" \
-		"git-delta" \
 		"google-cloud-sdk" \
 		"histdb-rs" \
 		"i8kutils" \
