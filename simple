@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "packages to build: ${@}"
+/rua -i install -u ${@}
