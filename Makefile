@@ -29,6 +29,7 @@ packages:
 		"android-studio" \
 		"dell-bios-fan-control-git" \
 		"direnv" \
+		"direnv" \
 		"emacs-native-comp-git-enhanced" \
 		"epub2txt-git" \
 		"eva-git" \
