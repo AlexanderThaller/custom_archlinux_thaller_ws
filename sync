@@ -3,5 +3,10 @@
 set -o errexit   # Stop on command failures.
 set -o nounset   # Stop when there are undefined variables.
 
-ssh builduser@root.thaller.ws "mkdir -p /usr/home/builduser/repo/custom/os/x86_64/"
-rsync -azzPhe ssh /tmp/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ 'builduser@root.thaller.ws:/usr/home/builduser/repo/custom/os/x86_64/' --delete
+ssh builduser@root.thaller.ws \
+  "mkdir -p /usr/home/builduser/repo/custom/os/x86_64/"
+
+rsync -azzPhe ssh \
+  /tmp/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
+  'builduser@root.thaller.ws:/usr/home/builduser/repo/custom/os/x86_64/' \
+  --delete || exit 0

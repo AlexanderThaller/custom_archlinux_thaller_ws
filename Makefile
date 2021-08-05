@@ -3,7 +3,7 @@ packages_and_sync: packages sync
 build: image cleanup fetch_keys packages sync_packages cleanup
 
 image:
-	docker build -t custom_archlinux --build-arg CACHEBUST=$(date --iso=d) .
+	docker build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
 
 cleanup:
 	docker run \
