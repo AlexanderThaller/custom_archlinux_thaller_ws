@@ -3,13 +3,6 @@ FROM archlinux:latest
 COPY pacman.conf /etc/pacman.conf
 COPY mirrorlist /etc/pacman.d/mirrorlist
 
-RUN pacman-db-upgrade
-RUN pacman -Syyu --noconfirm \
-  base-devel \
-  git \
-  rust \
-  sudo
-
 COPY makepkg.conf /etc/makepkg.conf
 COPY sudoers /etc/sudoers
 
@@ -23,5 +16,14 @@ COPY \
   simple \
   rua \
   ./
+
+ARG CACHEBUST=1
+
+RUN pacman-db-upgrade
+RUN pacman -Syyu --noconfirm \
+  base-devel \
+  git \
+  rust \
+  sudo
 
 ENTRYPOINT ["./entrypoint"]
