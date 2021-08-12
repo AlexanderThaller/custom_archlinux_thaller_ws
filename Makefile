@@ -50,7 +50,8 @@ packages:
 		"telegraf-bin" \
 		"tmux-cssh" \
 		"tmux-xpanes" \
-		"zoom"
+		"zoom" \
+		"zoxide"
 
 sync_packages:
 	./sync
