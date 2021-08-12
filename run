@@ -5,4 +5,3 @@ set -o nounset   # Stop when there are undefined variables.
 
 #git pull
 make build
-./sync
