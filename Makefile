@@ -2,6 +2,8 @@ packages_and_sync: packages sync
 
 build: image cleanup fetch_keys packages sync_packages cleanup
 
+build_single: image cleanup fetch_keys download_packages package sync_packages cleanup
+
 image:
 	docker build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
 
@@ -40,6 +42,7 @@ packages:
 		"kafkacat" \
 		"leftwm" \
 		"mkpasswd" \
+		"neuron-zettelkasten-bin" \
 		"nginx-mod-fancyindex" \
 		"ngrok" \
 		"nomad-bin" \
@@ -53,5 +56,23 @@ packages:
 		"zoom" \
 		"zoxide"
 
+package:
+	docker run \
+		--cpus="32.0" \
+		--cpuset-cpus="0-31" \
+		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
+		custom_archlinux:latest \
+		build \
+		"$(package)"
+
 sync_packages:
 	./sync
+
+download_packages:
+	rsync -azPhe ssh \
+	'builduser@root.thaller.ws:/usr/home/builduser/repo/custom/os/x86_64/' \
+	/tmp/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
+	--exclude=custom.db \
+	--exclude=custom.db.tar.gz \
+	--exclude=custom.files \
+	--exclude=custom.files.tar.gz
