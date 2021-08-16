@@ -29,6 +29,7 @@ packages:
 		build \
 		"android-sdk" \
 		"android-studio" \
+		"bacon" \
 		"dell-bios-fan-control-git" \
 		"direnv" \
 		"direnv" \
