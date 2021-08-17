@@ -55,7 +55,7 @@ packages:
 		"tmux-cssh" \
 		"tmux-xpanes" \
 		"zoom" \
-		"zoxide"
+		"zoxide-git"
 
 package:
 	docker run \

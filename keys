@@ -10,11 +10,13 @@ chmod 700 "/home/${User}/.gnupg"
 
 for key in "${@}"; do
   for server in $(shuf -e \
-    hkp://p80.pool.sks-keyservers.net:80 \
+    keys.openpgp.org \
+    pgp.mit.edu \
+    keyring.debian.org \
     keyserver.ubuntu.com \
-    hkp://keyserver.ubuntu.com:80 \
-    keyserver.pgp.com \
-    pgp.mit.edu) ; do \
+    attester.flowcrypt.com \
+    zimmermann.mayfirst.org
+    ) ; do \
 
     sudo -u "${User}" gpg --keyserver "${server}" --recv-keys "${key}" && break || : ; \
   done; \
