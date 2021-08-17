@@ -54,8 +54,7 @@ packages:
 		"telegraf-bin" \
 		"tmux-cssh" \
 		"tmux-xpanes" \
-		"zoom" \
-		"zoxide-git"
+		"zoom"
 
 package:
 	docker run \
