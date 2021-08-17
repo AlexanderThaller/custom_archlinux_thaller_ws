@@ -70,6 +70,13 @@ sync_packages:
 	./sync
 
 download_packages:
+	docker run \
+		--cpus="32.0" \
+		--cpuset-cpus="0-31" \
+		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
+		custom_archlinux:latest \
+		setup
+
 	rsync -azPhe ssh \
 	'builduser@root.thaller.ws:/usr/home/builduser/repo/custom/os/x86_64/' \
 	/tmp/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \

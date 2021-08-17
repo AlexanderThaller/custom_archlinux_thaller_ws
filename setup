@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+readonly User="build"
+readonly Folder="/home/${User}/.local/share/rua/checked_tars"
+
+mkdir -p "${Folder}"
+chown -R "${User}:${User}" "/home/${User}"

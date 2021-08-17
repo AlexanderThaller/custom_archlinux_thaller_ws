@@ -22,6 +22,10 @@ case "${Command}" in
     ./clean "${@}"
     ;;
 
+  "setup")
+    ./setup "${@}"
+    ;;
+
   *)
     echo "unkown command ${Command}" >&2
     exit 1

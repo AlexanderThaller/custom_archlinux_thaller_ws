@@ -13,8 +13,9 @@ COPY \
   clean \
   entrypoint \
   keys \
-  simple \
   rua \
+  setup \
+  simple \
   ./
 
 ARG CACHEBUST=1
