@@ -13,12 +13,12 @@ cleanup:
 		custom_archlinux:latest \
 		clean
 
-fetch_keys:
+fetch_key:
 	docker run \
 		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		keys \
-		"6C35B99309B5FA62"
+		"$(key)"
 
 packages:
 	docker run \
