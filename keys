@@ -16,8 +16,9 @@ for key in "${@}"; do
     keyserver.ubuntu.com \
     attester.flowcrypt.com \
     zimmermann.mayfirst.org
-    ) ; do \
+    ); do
 
-    sudo -u "${User}" gpg --keyserver "${server}" --recv-keys "${key}" && break || : ; \
-  done; \
+    sudo -u "${User}" gpg --keyserver "${server}" --recv-keys "${key}" && break
+    sleep 1
+  done
 done
