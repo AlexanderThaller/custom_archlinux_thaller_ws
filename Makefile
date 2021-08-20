@@ -36,6 +36,7 @@ packages:
 		"emacs-native-comp-git-enhanced" \
 		"epub2txt-git" \
 		"eva-git" \
+		"fastmod" \
 		"flutter" \
 		"google-cloud-sdk" \
 		"histdb-rs" \
