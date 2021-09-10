@@ -32,7 +32,7 @@ packages:
 		"bacon" \
 		"dell-bios-fan-control-git" \
 		"direnv" \
-		"direnv" \
+		"dive-git" \
 		"emacs-native-comp-git-enhanced" \
 		"epub2txt-git" \
 		"eva-git" \
