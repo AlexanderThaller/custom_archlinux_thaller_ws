@@ -39,6 +39,7 @@ packages:
 		"fastmod" \
 		"flutter" \
 		"google-cloud-sdk" \
+		"hadolint-bin" \
 		"histdb-rs" \
 		"i8kutils" \
 		"kafkacat" \
