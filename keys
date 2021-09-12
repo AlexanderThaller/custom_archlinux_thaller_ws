@@ -9,6 +9,10 @@ chown -R "${User}:${User}" "/home/${User}/.gnupg"
 chmod 700 "/home/${User}/.gnupg"
 
 for key in "${@}"; do
+  if [[ -z "${key}" ]]; then
+    continue
+  fi
+
   for server in $(shuf -e \
     keys.openpgp.org \
     pgp.mit.edu \

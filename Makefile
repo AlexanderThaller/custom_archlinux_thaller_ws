@@ -1,8 +1,8 @@
+build: image cleanup fetch_key packages sync_packages cleanup
+
 packages_and_sync: packages sync
 
-build: image cleanup packages sync_packages cleanup
-
-build_single: image cleanup download_packages package sync_packages cleanup
+build_single: image cleanup download_packages fetch_key package sync_packages cleanup
 
 image:
 	docker build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
@@ -18,6 +18,7 @@ fetch_key:
 		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		keys \
+		"6C35B99309B5FA62" \
 		"$(key)"
 
 packages:
@@ -42,9 +43,10 @@ packages:
 		"hadolint-bin" \
 		"histdb-rs" \
 		"i8kutils" \
-		"kafkacat" \
+		"kafkacat-git" \
 		"leftwm" \
 		"mkpasswd" \
+		"mqtt-explorer" \
 		"neuron-zettelkasten-bin" \
 		"nginx-mod-fancyindex" \
 		"ngrok" \
