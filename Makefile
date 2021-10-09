@@ -9,13 +9,13 @@ image:
 
 cleanup:
 	docker run \
-		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		clean
 
 fetch_key:
 	docker run \
-		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		keys \
 		"6C35B99309B5FA62" \
@@ -25,7 +25,7 @@ packages:
 	docker run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
-		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
 		"android-sdk" \
@@ -64,7 +64,7 @@ package:
 	docker run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
-		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
 		"$(package)"
@@ -76,13 +76,13 @@ download_packages:
 	docker run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
-		-v "/tmp/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		setup
 
 	rsync -azPhe ssh \
-	'builduser@root.thaller.ws:/usr/home/builduser/repo/custom/os/x86_64/' \
-	/tmp/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
+	'root.thaller.ws:/data/archlinux_thaller_ws/custom/' \
+	/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
 	--exclude=custom.db \
 	--exclude=custom.db.tar.gz \
 	--exclude=custom.files \
