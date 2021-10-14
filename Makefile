@@ -34,14 +34,14 @@ packages:
 		"dell-bios-fan-control-git" \
 		"direnv" \
 		"dive-git" \
-		"emacs-native-comp-git-enhanced" \
+		"emacs-git" \
 		"epub2txt-git" \
 		"eva-git" \
 		"fastmod" \
 		"flutter" \
 		"google-cloud-sdk" \
 		"hadolint-bin" \
-		"histdb-rs" \
+		"hstdb" \
 		"i8kutils" \
 		"kafkacat-git" \
 		"leftwm" \
@@ -52,6 +52,7 @@ packages:
 		"ngrok" \
 		"nomad-bin" \
 		"rua" \
+		"seafile-client" \
 		"steamcmd" \
 		"teams" \
 		"teamviewer" \
