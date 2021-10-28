@@ -51,6 +51,7 @@ packages:
 		"nginx-mod-fancyindex" \
 		"ngrok" \
 		"nomad-bin" \
+		"obs-v4l2sink" \
 		"rua" \
 		"seafile-client" \
 		"steamcmd" \
