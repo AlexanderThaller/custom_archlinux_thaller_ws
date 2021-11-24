@@ -28,8 +28,6 @@ packages:
 		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
-		"android-sdk" \
-		"android-studio" \
 		"bacon" \
 		"dell-bios-fan-control-git" \
 		"direnv" \
@@ -38,24 +36,18 @@ packages:
 		"epub2txt-git" \
 		"eva-git" \
 		"fastmod" \
-		"flutter" \
 		"google-cloud-sdk" \
 		"hadolint-bin" \
 		"hstdb" \
 		"i8kutils" \
 		"kafkacat-git" \
-		"leftwm" \
 		"mkpasswd" \
-		"mqtt-explorer" \
-		"neuron-zettelkasten-bin" \
 		"nginx-mod-fancyindex" \
 		"ngrok" \
-		"nomad-bin" \
 		"obs-v4l2sink" \
 		"rua" \
 		"seafile-client" \
 		"steamcmd" \
-		"teams" \
 		"teamviewer" \
 		"telegraf-bin" \
 		"tmux-cssh" \
