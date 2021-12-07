@@ -30,7 +30,6 @@ packages:
 		build \
 		"bacon" \
 		"dell-bios-fan-control-git" \
-		"direnv" \
 		"dive-git" \
 		"emacs-git" \
 		"epub2txt-git" \
