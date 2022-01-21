@@ -39,6 +39,7 @@ packages:
 		"hadolint-bin" \
 		"hstdb" \
 		"i8kutils" \
+		"insync" \
 		"kafkacat-git" \
 		"mkpasswd" \
 		"mold" \
@@ -52,6 +53,7 @@ packages:
 		"telegraf-bin" \
 		"tmux-cssh" \
 		"tmux-xpanes" \
+		"uhk-agent-appimage" \
 		"zoom"
 
 package:

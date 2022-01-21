@@ -8,6 +8,9 @@ COPY gpg_key_files/ /etc/gpg_key_files/
 ARG CACHEBUST=1
 
 RUN pacman-db-upgrade
+
+RUN pacman -Sy --noconfirm archlinux-keyring
+
 RUN pacman -Syyu --noconfirm \
   base-devel \
   git \
