@@ -42,7 +42,6 @@ packages:
 		"insync" \
 		"kafkacat-git" \
 		"mkpasswd" \
-		"mold" \
 		"nginx-mod-fancyindex" \
 		"ngrok" \
 		"obs-v4l2sink" \
