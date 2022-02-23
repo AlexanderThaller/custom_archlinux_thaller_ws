@@ -19,6 +19,7 @@ fetch_key:
 		custom_archlinux:latest \
 		keys \
 		"6C35B99309B5FA62" \
+		"3AB00996FC26A641" \
 		"$(key)"
 
 packages:
@@ -33,6 +34,7 @@ packages:
 		"dive-git" \
 		"emacs-git" \
 		"epub2txt-git" \
+		"etcd" \
 		"eva-git" \
 		"fastmod" \
 		"google-cloud-sdk" \
@@ -40,7 +42,9 @@ packages:
 		"hstdb" \
 		"i8kutils" \
 		"insync" \
+		"jsonnet-bundler" \
 		"kafkacat-git" \
+		"krew" \
 		"mkpasswd" \
 		"nginx-mod-fancyindex" \
 		"ngrok" \
