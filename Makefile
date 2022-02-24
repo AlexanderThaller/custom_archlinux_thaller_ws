@@ -57,6 +57,7 @@ packages:
 		"tmux-cssh" \
 		"tmux-xpanes" \
 		"uhk-agent-appimage" \
+		"zfs-dkms" \
 		"zoom"
 
 package:
