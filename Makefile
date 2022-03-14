@@ -20,6 +20,7 @@ fetch_key:
 		keys \
 		"6C35B99309B5FA62" \
 		"3AB00996FC26A641" \
+		"6AD860EED4598027" \
 		"$(key)"
 
 packages:
@@ -49,6 +50,8 @@ packages:
 		"nginx-mod-fancyindex" \
 		"ngrok" \
 		"obs-v4l2sink" \
+		"prometheus-fritzbox-exporter-sberk42-git" \
+		"pushgateway" \
 		"rua" \
 		"seafile-client" \
 		"steamcmd" \
