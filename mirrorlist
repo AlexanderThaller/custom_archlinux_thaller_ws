@@ -3,11 +3,12 @@
 ################################################################################
 
 # With:       reflector --country Germany --protocol https --save /etc/pacman.d/mirrorlist
-# When:       2022-03-14 12:50:42 UTC
+# When:       2022-03-14 13:46:21 UTC
 # From:       https://archlinux.org/mirrors/status/json/
-# Retrieved:  2022-03-14 12:50:42 UTC
-# Last Check: 2022-03-14 12:23:33 UTC
+# Retrieved:  2022-03-14 13:46:21 UTC
+# Last Check: 2022-03-14 13:20:20 UTC
 
+Server = https://archlinux.thaller.ws/$repo/os/$arch
 Server = https://ftp.spline.inf.fu-berlin.de/mirrors/archlinux/$repo/os/$arch
 Server = https://mirror.selfnet.de/archlinux/$repo/os/$arch
 Server = https://ftp.halifax.rwth-aachen.de/archlinux/$repo/os/$arch
@@ -22,7 +23,6 @@ Server = https://mirror.f4st.host/archlinux/$repo/os/$arch
 Server = https://mirror.pseudoform.org/$repo/os/$arch
 Server = https://arch.jensgutermuth.de/$repo/os/$arch
 Server = https://mirror.ubrco.de/archlinux/$repo/os/$arch
-Server = https://archlinux.thaller.ws/$repo/os/$arch
 Server = https://mirror.bethselamin.de/$repo/os/$arch
 Server = https://ftp.wrz.de/pub/archlinux/$repo/os/$arch
 Server = https://packages.oth-regensburg.de/archlinux/$repo/os/$arch
