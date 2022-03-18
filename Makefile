@@ -50,7 +50,6 @@ packages:
 		"nginx-mod-fancyindex" \
 		"ngrok" \
 		"obs-v4l2sink" \
-		"prometheus-fritzbox-exporter-sberk42-git" \
 		"pushgateway" \
 		"rua" \
 		"seafile-client" \
