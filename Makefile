@@ -48,6 +48,7 @@ packages:
 		"mkpasswd" \
 		"nginx-mod-fancyindex" \
 		"ngrok" \
+		"nomino" \
 		"obs-v4l2sink" \
 		"pushgateway" \
 		"rua" \
