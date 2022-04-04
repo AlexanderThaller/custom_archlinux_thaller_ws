@@ -30,7 +30,6 @@ packages:
 		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
-		"bacon" \
 		"dell-bios-fan-control-git" \
 		"dive-git" \
 		"emacs-git" \
