@@ -53,6 +53,7 @@ packages:
 		"pushgateway" \
 		"rua" \
 		"seafile-client" \
+		"snapd" \
 		"steamcmd" \
 		"teamviewer" \
 		"telegraf-bin" \
