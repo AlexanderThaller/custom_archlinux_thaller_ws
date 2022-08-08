@@ -18,9 +18,10 @@ fetch_key:
 		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		keys \
-		"6C35B99309B5FA62" \
+		"139B09DA5BF0D338" \
 		"3AB00996FC26A641" \
 		"6AD860EED4598027" \
+		"6C35B99309B5FA62" \
 		"$(key)"
 
 packages:
