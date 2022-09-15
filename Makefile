@@ -39,6 +39,7 @@ packages:
 		"eva-git" \
 		"fastmod" \
 		"google-cloud-sdk" \
+		"google-cloud-sdk-gke-gcloud-auth-plugin" \
 		"hadolint-bin" \
 		"hstdb" \
 		"i8kutils" \
