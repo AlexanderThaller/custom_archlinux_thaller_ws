@@ -8,12 +8,16 @@ image:
 	podman build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
 
 cleanup:
+	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
+
 	podman run \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		clean
 
 fetch_key:
+	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
+
 	podman run \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
@@ -25,6 +29,8 @@ fetch_key:
 		"$(key)"
 
 packages:
+	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
+
 	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
@@ -66,6 +72,8 @@ packages:
 		"zoom"
 
 package:
+	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
+
 	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
@@ -78,6 +86,8 @@ sync_packages:
 	./sync
 
 download_packages:
+	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
+
 	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
