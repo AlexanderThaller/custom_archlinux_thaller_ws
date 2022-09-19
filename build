@@ -9,8 +9,9 @@ pacman -Syu --noconfirm
 mkdir -p "/home/${User}/"
 chown -R "${User}:${User}" "/home/${User}/"
 
-sudo -u "${User}" ./simple "${@}"
+sudo -u "${User}" ./simple "${@}" || exit 1
 
+mkdir -p /home/build/.local/share/rua/checked_tars/
 cd /home/build/.local/share/rua/checked_tars/ || exit 1
 mv /home/build/.local/share/rua/checked_tars/*/*pkg.tar.xz .
 find . -type d -delete
