@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-set -o nounset   # Stop when there are undefined variables.
+set -o nounset # Stop when there are undefined variables.
 
 rsync -azzPhe ssh \
-  /home/athaller/.cache/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
-  'root.thaller.ws:/data/archlinux_thaller_ws/custom/' \
-  --delete
+	"${HOME}/.cache/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/" \
+	'root.thaller.ws:/data/archlinux_thaller_ws/custom/' \
+	--delete
 
 ssh root.thaller.ws 'varnishadm "ban req.http.host ~ custom-archlinux.thaller.ws"'
