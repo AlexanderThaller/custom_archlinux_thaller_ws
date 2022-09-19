@@ -11,7 +11,7 @@ chown -R "${User}:${User}" "/home/${User}/"
 
 sudo -u "${User}" ./simple "${@}"
 
-cd /home/build/.local/share/rua/checked_tars/
+cd /home/build/.local/share/rua/checked_tars/ || exit 1
 mv /home/build/.local/share/rua/checked_tars/*/*pkg.tar.xz .
 find . -type d -delete
 repo-add "custom.db.tar.gz" ./*.pkg.tar.xz
