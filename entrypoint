@@ -3,30 +3,31 @@
 readonly Command="${1:-""}"
 
 if [[ -z "${Command}" ]]; then
-  echo "need command (arg 1)" >&2
-  exit 1
+	echo "need command (arg 1)" >&2
+	exit 1
 fi
 
 shift
 
 case "${Command}" in
-  "keys")
-    ./keys "${@}"
-    ;;
+"keys")
+	./keys "${@}"
+	;;
 
-  "build")
-    ./build "${@}"
-    ;;
+"build")
+	./build "${@}"
+	;;
 
-  "clean")
-    ./clean "${@}"
-    ;;
+"clean")
+	./clean "${@}"
+	;;
 
-  "setup")
-    ./setup "${@}"
-    ;;
+"setup")
+	./setup "${@}"
+	;;
 
-  *)
-    echo "unkown command ${Command}" >&2
-    exit 1
+*)
+	echo "unkown command ${Command}" >&2
+	exit 1
+	;;
 esac

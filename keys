@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o nounset   # Stop when there are undefined variables.
+set -o nounset # Stop when there are undefined variables.
 
 readonly User="build"
 
@@ -9,20 +9,21 @@ chown -R "${User}:${User}" "/home/${User}/.gnupg"
 chmod 700 "/home/${User}/.gnupg"
 
 for key in "${@}"; do
-  if [[ -z "${key}" ]]; then
-    continue
-  fi
+	if [[ -z "${key}" ]]; then
+		continue
+	fi
 
-  for server in $(shuf -e \
-    keys.openpgp.org \
-    pgp.mit.edu \
-    keyring.debian.org \
-    keyserver.ubuntu.com \
-    attester.flowcrypt.com \
-    zimmermann.mayfirst.org
-    ); do
+	for server in $(
+		shuf -e \
+			keys.openpgp.org \
+			pgp.mit.edu \
+			keyring.debian.org \
+			keyserver.ubuntu.com \
+			attester.flowcrypt.com \
+			zimmermann.mayfirst.org
+	); do
 
-    sudo -u "${User}" gpg --keyserver "${server}" --recv-keys "${key}" && break
-    sleep 1
-  done
+		sudo -u "${User}" gpg --keyserver "${server}" --recv-keys "${key}" && break
+		sleep 1
+	done
 done

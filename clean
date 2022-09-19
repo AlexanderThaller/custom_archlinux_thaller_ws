@@ -2,6 +2,6 @@
 
 readonly User="build"
 
-set -o nounset   # Stop when there are undefined variables.
+set -o nounset # Stop when there are undefined variables.
 
 rm -rf "/home/${User}/"
