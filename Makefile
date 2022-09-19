@@ -9,13 +9,13 @@ image:
 
 cleanup:
 	podman run \
-		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "$HOME/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		clean
 
 fetch_key:
 	podman run \
-		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "$HOME/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		keys \
 		"139B09DA5BF0D338" \
@@ -28,7 +28,7 @@ packages:
 	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
-		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "$HOME/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
 		"dell-bios-fan-control-git" \
@@ -69,7 +69,7 @@ package:
 	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
-		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "$HOME/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
 		"$(package)"
@@ -81,13 +81,13 @@ download_packages:
 	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
-		-v "/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
+		-v "$HOME/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		setup
 
 	rsync -azPhe ssh \
 	'root.thaller.ws:/data/archlinux_thaller_ws/custom/' \
-	/home/athaller/.cache/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
+	$HOME/.cache/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
 	--exclude=custom.db \
 	--exclude=custom.db.tar.gz \
 	--exclude=custom.files \
