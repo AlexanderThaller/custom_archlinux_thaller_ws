@@ -7,6 +7,7 @@ COPY gpg_key_files/ /etc/gpg_key_files/
 
 ARG CACHEBUST=1
 
+RUN rm /etc/mtab
 RUN ln -sf /proc/mount /etc/mtab
 
 RUN pacman-db-upgrade
