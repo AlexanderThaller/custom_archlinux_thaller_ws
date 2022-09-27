@@ -50,10 +50,11 @@ packages:
 		"hstdb" \
 		"i8kutils" \
 		"insync" \
+		"jackett" \
+		"jellyfin" \
 		"jsonnet-bundler" \
 		"kafkacat-git" \
 		"krew" \
-		"mkpasswd" \
 		"nginx-mod-fancyindex" \
 		"ngrok" \
 		"nomino" \
@@ -62,6 +63,7 @@ packages:
 		"rua" \
 		"seafile-client" \
 		"snapd" \
+		"sonarr" \
 		"steamcmd" \
 		"teamviewer" \
 		"telegraf-bin" \
