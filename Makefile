@@ -98,7 +98,7 @@ download_packages:
 		setup
 
 	rsync -azPhe ssh \
-	'root.thaller.ws:/data/archlinux_thaller_ws/custom/' \
+	'192.168.1.200:/data/archlinux_thaller_ws/custom/' \
 	${HOME}/.cache/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/ \
 	--exclude=custom.db \
 	--exclude=custom.db.tar.gz \
