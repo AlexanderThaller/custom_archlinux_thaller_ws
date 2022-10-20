@@ -8,7 +8,7 @@
 # Retrieved:  2022-03-14 13:46:21 UTC
 # Last Check: 2022-03-14 13:20:20 UTC
 
-Server = http://192.168.1.200/archlinux/$repo/os/$arch
+Server = http://192.168.1.200/$repo/os/$arch
 Server = https://archlinux.thaller.ws/$repo/os/$arch
 Server = https://ftp.spline.inf.fu-berlin.de/mirrors/archlinux/$repo/os/$arch
 Server = https://mirror.selfnet.de/archlinux/$repo/os/$arch
