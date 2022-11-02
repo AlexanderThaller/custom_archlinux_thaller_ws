@@ -6,5 +6,3 @@ rsync -azzPhe ssh \
 	"${HOME}/.cache/custom_archlinux_thaller_ws/outdir/build/.local/share/rua/checked_tars/" \
 	'root.thaller.ws:/data/archlinux_thaller_ws/custom/' \
 	--delete
-
-ssh root.thaller.ws 'varnishadm "ban req.http.host ~ custom-archlinux.thaller.ws"'
