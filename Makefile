@@ -51,8 +51,7 @@ packages:
 		"i8kutils" \
 		"insync" \
 		"jackett" \
-		"jellyfin" \
-		"jsonnet-bundler" \
+		"jellyfin-bin" \
 		"kafkacat-git" \
 		"krew" \
 		"nginx-mod-fancyindex" \
