@@ -40,6 +40,7 @@ packages:
 		"dell-bios-fan-control-git" \
 		"dive-git" \
 		"emacs-git" \
+		"epson-inkjet-printer-escpr" \
 		"epub2txt-git" \
 		"etcd" \
 		"eva-git" \
