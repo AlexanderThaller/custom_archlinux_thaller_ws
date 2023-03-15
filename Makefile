@@ -5,12 +5,12 @@ packages_and_sync: packages sync
 build_single: image cleanup download_packages fetch_key package sync_packages cleanup
 
 image:
-	docker build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
+	podman build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
 
 cleanup:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
 
-	docker run \
+	podman run \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		clean
@@ -18,7 +18,7 @@ cleanup:
 fetch_key:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
 
-	docker run \
+	podman run \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		keys \
@@ -31,7 +31,7 @@ fetch_key:
 packages:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
 
-	docker run \
+	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
@@ -76,7 +76,7 @@ packages:
 package:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
 
-	docker run \
+	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
@@ -90,7 +90,7 @@ sync_packages:
 download_packages:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
 
-	docker run \
+	podman run \
 		--cpus="32.0" \
 		--cpuset-cpus="0-31" \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
