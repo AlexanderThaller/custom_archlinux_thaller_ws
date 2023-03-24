@@ -33,20 +33,13 @@ packages:
 
 	podman run \
 		--cpus="32.0" \
-		--cpuset-cpus="0-31" \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
-		"dell-bios-fan-control-git" \
+		"cdk8s" \
 		"dive-git" \
 		"emacs-git" \
-		"epson-inkjet-printer-escpr" \
-		"epub2txt-git" \
-		"etcd" \
-		"eva-git" \
 		"fastmod" \
-		"google-cloud-sdk" \
-		"google-cloud-sdk-gke-gcloud-auth-plugin" \
 		"hadolint-bin" \
 		"hstdb" \
 		"i8kutils" \
@@ -70,15 +63,13 @@ packages:
 		"tmux-xpanes" \
 		"uhk-agent-appimage" \
 		"wsdd" \
-		"zfs-dkms" \
-		"zoom"
+		"zfs-dkms"
 
 package:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
 
 	podman run \
 		--cpus="32.0" \
-		--cpuset-cpus="0-31" \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		build \
@@ -92,7 +83,6 @@ download_packages:
 
 	podman run \
 		--cpus="32.0" \
-		--cpuset-cpus="0-31" \
 		-v "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/:/home/" \
 		custom_archlinux:latest \
 		setup

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL="sparse"
+
 echo "packages to build: ${@}"
 /rua -i install -u ${@}
