@@ -49,6 +49,7 @@ packages:
 		"nginx-mod-fancyindex" \
 		"ngrok" \
 		"nomino" \
+		"ntpd-rs" \
 		"pushgateway" \
 		"rua" \
 		"seafile-client" \
