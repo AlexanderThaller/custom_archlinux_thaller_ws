@@ -5,7 +5,7 @@ packages_and_sync: packages sync
 build_single: image cleanup download_packages fetch_key package sync_packages cleanup
 
 image:
-	docker build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
+	podman build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
 
 cleanup:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
@@ -24,7 +24,6 @@ fetch_key:
 		keys \
 		"139B09DA5BF0D338" \
 		"3AB00996FC26A641" \
-		"6AD860EED4598027" \
 		"6C35B99309B5FA62" \
 		"$(key)"
 

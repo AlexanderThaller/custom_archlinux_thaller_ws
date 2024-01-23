@@ -1,4 +1,4 @@
-FROM archlinux:latest
+FROM archlinux:base-devel
 
 COPY pacman.conf /etc/pacman.conf
 COPY mirrorlist /etc/pacman.d/mirrorlist
@@ -11,7 +11,7 @@ RUN ln -sf /proc/self/mounts /etc/mtab
 
 RUN pacman-db-upgrade
 
-RUN pacman -Sy --noconfirm archlinux-keyring
+RUN pacman -Syy --noconfirm archlinux-keyring
 
 RUN pacman -Syyu --noconfirm \
   base-devel \
