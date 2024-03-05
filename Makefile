@@ -5,7 +5,7 @@ packages_and_sync: packages sync
 build_single: image cleanup download_packages fetch_key package sync_packages cleanup
 
 image:
-	podman build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
+	docker build -t custom_archlinux --build-arg CACHEBUST=$(shell date --iso=d) .
 
 cleanup:
 	mkdir -p "${HOME}/.cache/custom_archlinux_thaller_ws/outdir/"
@@ -37,7 +37,6 @@ packages:
 		build \
 		"cdk8s" \
 		"dive-git" \
-		"emacs-git" \
 		"fastmod" \
 		"hadolint-bin" \
 		"hstdb" \
@@ -51,6 +50,7 @@ packages:
 		"ntpd-rs" \
 		"pushgateway" \
 		"rua" \
+		"rustdesk-bin" \
 		"seafile-client" \
 		"snapd" \
 		"sonarr" \
