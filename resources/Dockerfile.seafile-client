@@ -1,0 +1,34 @@
+FROM builder as seafile-client
+
+RUN git clone "https://aur.archlinux.org/libsearpc.git" && \
+    cd "libsearpc" && \
+    makepkg \
+    --syncdeps \
+    -sic \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "libsearpc"
+
+RUN git clone "https://aur.archlinux.org/seafile.git" && \
+    cd "seafile" && \
+    makepkg \
+    --syncdeps \
+    -sic \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "seafile"
+
+RUN git clone "https://aur.archlinux.org/seafile-client.git" && \
+    cd "seafile-client" && \
+    makepkg \
+    --syncdeps \
+    -sc \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "seafile-client"

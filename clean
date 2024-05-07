@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-readonly User="build"
-
-set -o nounset # Stop when there are undefined variables.
-
-rm -rf "/home/${User}/"
