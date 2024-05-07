@@ -7,7 +7,7 @@ RUN git clone "https://aur.archlinux.org/cdk8s.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "cdk8s"
 FROM builder as dive-git
@@ -19,7 +19,7 @@ RUN git clone "https://aur.archlinux.org/dive-git.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "dive-git"
 FROM builder as fastmod
@@ -31,7 +31,7 @@ RUN git clone "https://aur.archlinux.org/fastmod.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "fastmod"
 FROM builder as hadolint-bin
@@ -43,7 +43,7 @@ RUN git clone "https://aur.archlinux.org/hadolint-bin.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "hadolint-bin"
 FROM builder as hstdb
@@ -55,7 +55,7 @@ RUN git clone "https://aur.archlinux.org/hstdb.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "hstdb"
 FROM builder as i8kutils
@@ -67,7 +67,7 @@ RUN git clone "https://aur.archlinux.org/i8kutils.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "i8kutils"
 FROM builder as insync
@@ -79,7 +79,7 @@ RUN git clone "https://aur.archlinux.org/insync.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "insync"
 FROM builder as jackett
@@ -91,7 +91,7 @@ RUN git clone "https://aur.archlinux.org/jackett.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "jackett"
 FROM builder as krew
@@ -103,9 +103,21 @@ RUN git clone "https://aur.archlinux.org/krew.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "krew"
+FROM builder as nginx-mainline-mod-dav-ext
+
+RUN git clone "https://aur.archlinux.org/nginx-mainline-mod-dav-ext.git" && \
+  cd "nginx-mainline-mod-dav-ext" && \
+  makepkg \
+  --syncdeps \
+  -sc \
+  --noconfirm && \
+  ls -lah && \
+  cp *.pkg.tar.xz /output && \
+  cd .. && \
+  rm -rf "nginx-mainline-mod-dav-ext"
 FROM builder as nginx-mod-fancyindex
 
 RUN git clone "https://aur.archlinux.org/nginx-mod-fancyindex.git" && \
@@ -115,7 +127,7 @@ RUN git clone "https://aur.archlinux.org/nginx-mod-fancyindex.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "nginx-mod-fancyindex"
 FROM builder as ngrok
@@ -127,7 +139,7 @@ RUN git clone "https://aur.archlinux.org/ngrok.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "ngrok"
 FROM builder as nomino
@@ -139,7 +151,7 @@ RUN git clone "https://aur.archlinux.org/nomino.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "nomino"
 FROM builder as ntpd-rs
@@ -151,7 +163,7 @@ RUN git clone "https://aur.archlinux.org/ntpd-rs.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "ntpd-rs"
 FROM builder as pushgateway
@@ -163,7 +175,7 @@ RUN git clone "https://aur.archlinux.org/pushgateway.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "pushgateway"
 FROM builder as rua
@@ -175,7 +187,7 @@ RUN git clone "https://aur.archlinux.org/rua.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "rua"
 FROM builder as rustdesk-bin
@@ -187,9 +199,21 @@ RUN git clone "https://aur.archlinux.org/rustdesk-bin.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "rustdesk-bin"
+FROM builder as rustscan
+
+RUN git clone "https://aur.archlinux.org/rustscan.git" && \
+  cd "rustscan" && \
+  makepkg \
+  --syncdeps \
+  -sc \
+  --noconfirm && \
+  ls -lah && \
+  cp *.pkg.tar.xz /output && \
+  cd .. && \
+  rm -rf "rustscan"
 FROM builder as snapd
 
 RUN git clone "https://aur.archlinux.org/snapd.git" && \
@@ -199,7 +223,7 @@ RUN git clone "https://aur.archlinux.org/snapd.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "snapd"
 FROM builder as sonarr
@@ -211,7 +235,7 @@ RUN git clone "https://aur.archlinux.org/sonarr.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "sonarr"
 FROM builder as steamcmd
@@ -223,7 +247,7 @@ RUN git clone "https://aur.archlinux.org/steamcmd.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "steamcmd"
 FROM builder as teamviewer
@@ -235,7 +259,7 @@ RUN git clone "https://aur.archlinux.org/teamviewer.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "teamviewer"
 FROM builder as telegraf-bin
@@ -247,7 +271,7 @@ RUN git clone "https://aur.archlinux.org/telegraf-bin.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "telegraf-bin"
 FROM builder as tmux-cssh
@@ -259,7 +283,7 @@ RUN git clone "https://aur.archlinux.org/tmux-cssh.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "tmux-cssh"
 FROM builder as tmux-xpanes
@@ -271,7 +295,7 @@ RUN git clone "https://aur.archlinux.org/tmux-xpanes.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "tmux-xpanes"
 FROM builder as uhk-agent-appimage
@@ -283,7 +307,7 @@ RUN git clone "https://aur.archlinux.org/uhk-agent-appimage.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "uhk-agent-appimage"
 FROM builder as wsdd
@@ -295,7 +319,7 @@ RUN git clone "https://aur.archlinux.org/wsdd.git" && \
   -sc \
   --noconfirm && \
   ls -lah && \
-  cp *.pkg.tar.* /output && \
+  cp *.pkg.tar.xz /output && \
   cd .. && \
   rm -rf "wsdd"
 
@@ -309,6 +333,7 @@ COPY --from=i8kutils /output /output
 COPY --from=insync /output /output
 COPY --from=jackett /output /output
 COPY --from=krew /output /output
+COPY --from=nginx-mainline-mod-dav-ext /output /output
 COPY --from=nginx-mod-fancyindex /output /output
 COPY --from=ngrok /output /output
 COPY --from=nomino /output /output
@@ -316,6 +341,7 @@ COPY --from=ntpd-rs /output /output
 COPY --from=pushgateway /output /output
 COPY --from=rua /output /output
 COPY --from=rustdesk-bin /output /output
+COPY --from=rustscan /output /output
 COPY --from=snapd /output /output
 COPY --from=sonarr /output /output
 COPY --from=steamcmd /output /output
