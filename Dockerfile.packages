@@ -10,12 +10,6 @@ RUN git clone "https://aur.archlinux.org/fastmod.git" && \
   makepkg --syncdeps --noconfirm --clean && \
   cp *.pkg.tar.xz /output
 
-FROM builder as grocy
-RUN git clone "https://aur.archlinux.org/grocy.git" && \
-  cd "grocy" && \
-  makepkg --syncdeps --noconfirm --clean && \
-  cp *.pkg.tar.xz /output
-
 FROM builder as hadolint-bin
 RUN git clone "https://aur.archlinux.org/hadolint-bin.git" && \
   cd "hadolint-bin" && \
@@ -182,11 +176,16 @@ RUN git clone "https://aur.archlinux.org/uhk-agent-appimage.git" && \
   makepkg --syncdeps --noconfirm --clean && \
   cp *.pkg.tar.xz /output
 
+FROM builder as wsdd
+RUN git clone "https://aur.archlinux.org/wsdd.git" && \
+  cd "wsdd" && \
+  makepkg --syncdeps --noconfirm --clean && \
+  cp *.pkg.tar.xz /output
+
 
 FROM builder
 COPY --from=dive-git /output /output
 COPY --from=fastmod /output /output
-COPY --from=grocy /output /output
 COPY --from=hadolint-bin /output /output
 COPY --from=hstdb /output /output
 COPY --from=i8kutils /output /output
@@ -210,4 +209,5 @@ COPY --from=telegraf-bin /output /output
 COPY --from=tmux-cssh /output /output
 COPY --from=tmux-xpanes /output /output
 COPY --from=uhk-agent-appimage /output /output
+COPY --from=wsdd /output /output
 ENTRYPOINT [ "sleep", "infinity" ]
