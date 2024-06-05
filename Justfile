@@ -6,14 +6,14 @@
 builder:
   docker build -t "builder" . -f "Dockerfile.builder"
 
-# build a specific package
+# build all packages
 packages:
-  ./resources/generate_package_dockerfile > Dockerfile.packages
+  ./resources/generate_packages_dockerfile > Dockerfile.packages
 
   docker build \
     -t "packages" \
     -f "Dockerfile.packages" \
-    . 
+    .
 
   rm -rf packages
 
@@ -23,6 +23,15 @@ packages:
 
   cd packages && \
   repo-add custom.db.tar.gz *.pkg.tar.*
+
+# build a specific package
+package package:
+  ./resources/generate_package_dockerfile "{{ package }}" > "Dockerfile.{{ package }}"
+
+  docker build \
+    -t "packages" \
+    -f "Dockerfile.{{ package }}" \
+    . ; rm -f "Dockerfile.{{ package }}"
 
 # sync packages with upstream
 sync: 

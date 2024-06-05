@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -o errexit  # Stop on command failures.
+set -o errtrace # Make sure any error trap is inherited.
+set -o nounset  # Stop when there are undefined variables.
+set -o pipefail # Stop when a command in a pipe failes.
+
+ScriptPath="$(
+  cd -- "$(dirname "$0")" >/dev/null 2>&1
+  pwd -P
+)"
+readonly ScriptPath
+
+while read -r package; do
+  "${ScriptPath}/generate_package_dockerfile" "${package}"
+done <packages.list
+
+echo
+
+echo 'FROM builder'
+
+while read package; do
+  echo "COPY --from=${package} /output /output"
+done <packages.list
+
+echo 'ENTRYPOINT [ "sleep", "infinity" ]'

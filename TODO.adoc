@@ -1,3 +1,1 @@
 = TODO
-
-* [ ] Bring back https://aur.archlinux.org/packages/seafile-client which is currentyl not compiling ➕2024-05-07

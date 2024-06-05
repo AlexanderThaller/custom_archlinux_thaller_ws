@@ -11,33 +11,17 @@ ScriptPath="$(
 )"
 readonly ScriptPath
 
-while read package; do
-  if [[ -f "${ScriptPath}/Dockerfile.${package}" ]]; then
-    cat "${ScriptPath}/Dockerfile.${package}"
-  else
-    cat <<EOF
-FROM builder as ${package}
+readonly Package="${1:?Package name is required.}"
 
-RUN git clone "https://aur.archlinux.org/${package}.git" && \\
-  cd "${package}" && \\
-  makepkg \\
-  --syncdeps \\
-  -sc \\
-  --noconfirm && \\
-  ls -lah && \\
-  cp *.pkg.tar.xz /output && \\
-  cd .. && \\
-  rm -rf "${package}"
+if [[ -f "${ScriptPath}/Dockerfile.${Package}" ]]; then
+  cat "${ScriptPath}/Dockerfile.${Package}"
+else
+  cat <<EOF
+FROM builder as ${Package}
+RUN git clone "https://aur.archlinux.org/${Package}.git" && \\
+  cd "${Package}" && \\
+  makepkg --syncdeps --noconfirm --clean && \\
+  cp *.pkg.tar.xz /output
+
 EOF
-  fi
-done <packages.list
-
-echo
-
-echo 'FROM builder'
-
-while read package; do
-  echo "COPY --from=${package} /output /output"
-done <packages.list
-
-echo 'ENTRYPOINT [ "sleep", "infinity" ]'
+fi

@@ -1,6 +1,6 @@
-cdk8s
 dive-git
 fastmod
+grocy
 hadolint-bin
 hstdb
 i8kutils
@@ -15,6 +15,7 @@ ntpd-rs
 pushgateway
 rua
 rustdesk-bin
+seafile-client
 snapd
 sonarr
 steamcmd
