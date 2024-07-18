@@ -17,7 +17,7 @@ if [[ -f "${ScriptPath}/Dockerfile.${Package}" ]]; then
   cat "${ScriptPath}/Dockerfile.${Package}"
 else
   cat <<EOF
-FROM builder as ${Package}
+FROM builder AS ${Package}
 RUN git clone "https://aur.archlinux.org/${Package}.git" && \\
   cd "${Package}" && \\
   makepkg --syncdeps --noconfirm --clean && \\
