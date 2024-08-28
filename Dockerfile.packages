@@ -1,109 +1,109 @@
 FROM builder AS dive-git
 RUN git clone "https://aur.archlinux.org/dive-git.git" && \
   cd "dive-git" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS fastmod
 RUN git clone "https://aur.archlinux.org/fastmod.git" && \
   cd "fastmod" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS garage
 RUN git clone "https://aur.archlinux.org/garage.git" && \
   cd "garage" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS hadolint-bin
 RUN git clone "https://aur.archlinux.org/hadolint-bin.git" && \
   cd "hadolint-bin" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS hstdb
 RUN git clone "https://aur.archlinux.org/hstdb.git" && \
   cd "hstdb" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS i8kutils
 RUN git clone "https://aur.archlinux.org/i8kutils.git" && \
   cd "i8kutils" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS insync
 RUN git clone "https://aur.archlinux.org/insync.git" && \
   cd "insync" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS jackett
 RUN git clone "https://aur.archlinux.org/jackett.git" && \
   cd "jackett" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS k6
 RUN git clone "https://aur.archlinux.org/k6.git" && \
   cd "k6" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS krew
 RUN git clone "https://aur.archlinux.org/krew.git" && \
   cd "krew" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS nginx-mainline-mod-dav-ext
 RUN git clone "https://aur.archlinux.org/nginx-mainline-mod-dav-ext.git" && \
   cd "nginx-mainline-mod-dav-ext" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS nginx-mod-fancyindex
 RUN git clone "https://aur.archlinux.org/nginx-mod-fancyindex.git" && \
   cd "nginx-mod-fancyindex" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS ngrok
 RUN git clone "https://aur.archlinux.org/ngrok.git" && \
   cd "ngrok" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS nomino
 RUN git clone "https://aur.archlinux.org/nomino.git" && \
   cd "nomino" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS ntpd-rs
 RUN git clone "https://aur.archlinux.org/ntpd-rs.git" && \
   cd "ntpd-rs" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS pushgateway
 RUN git clone "https://aur.archlinux.org/pushgateway.git" && \
   cd "pushgateway" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS rua
 RUN git clone "https://aur.archlinux.org/rua.git" && \
   cd "rua" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS rustdesk-bin
 RUN git clone "https://aur.archlinux.org/rustdesk-bin.git" && \
   cd "rustdesk-bin" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder as seafile-client
@@ -143,55 +143,67 @@ RUN git clone "https://aur.archlinux.org/seafile-client.git" && \
 FROM builder AS snapd
 RUN git clone "https://aur.archlinux.org/snapd.git" && \
   cd "snapd" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS sonarr
 RUN git clone "https://aur.archlinux.org/sonarr.git" && \
   cd "sonarr" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS steamcmd
 RUN git clone "https://aur.archlinux.org/steamcmd.git" && \
   cd "steamcmd" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS teamviewer
 RUN git clone "https://aur.archlinux.org/teamviewer.git" && \
   cd "teamviewer" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS telegraf-bin
 RUN git clone "https://aur.archlinux.org/telegraf-bin.git" && \
   cd "telegraf-bin" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS tmux-cssh
 RUN git clone "https://aur.archlinux.org/tmux-cssh.git" && \
   cd "tmux-cssh" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS tmux-xpanes
 RUN git clone "https://aur.archlinux.org/tmux-xpanes.git" && \
   cd "tmux-xpanes" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS uhk-agent-appimage
 RUN git clone "https://aur.archlinux.org/uhk-agent-appimage.git" && \
   cd "uhk-agent-appimage" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 FROM builder AS wsdd
 RUN git clone "https://aur.archlinux.org/wsdd.git" && \
   cd "wsdd" && \
-  makepkg --syncdeps --noconfirm --clean && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.xz /output
+
+FROM builder AS zfs-dkms
+RUN git clone "https://aur.archlinux.org/zfs-dkms.git" && \
+  cd "zfs-dkms" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.xz /output
+
+FROM builder AS zfs-utils
+RUN git clone "https://aur.archlinux.org/zfs-utils.git" && \
+  cd "zfs-utils" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.xz /output
 
 
@@ -224,4 +236,6 @@ COPY --from=tmux-cssh /output /output
 COPY --from=tmux-xpanes /output /output
 COPY --from=uhk-agent-appimage /output /output
 COPY --from=wsdd /output /output
+COPY --from=zfs-dkms /output /output
+COPY --from=zfs-utils /output /output
 ENTRYPOINT [ "sleep", "infinity" ]
