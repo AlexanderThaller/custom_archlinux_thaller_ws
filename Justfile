@@ -6,7 +6,7 @@
 builder:
     docker build \
       --pull \
-      --build-arg="$(date --iso=ns)" \
+      --no-cache \
       -t "builder" \
       -f "Dockerfile.builder" \
       .
@@ -47,3 +47,6 @@ sync:
       --safe-links \
       "packages/" \
       'root.thaller.ws:/data/archlinux_thaller_ws/custom/'
+
+# build builder image, packages and sync them to remote
+run: builder packages sync

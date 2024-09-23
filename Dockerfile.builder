@@ -1,7 +1,5 @@
 FROM archlinux:base-devel
 
-ARG CACHEBUST=1
-
 COPY resources/makepkg.conf /etc/makepkg.conf
 COPY resources/mirrorlist /etc/pacman.d/mirrorlist
 COPY resources/pacman.conf /etc/pacman.conf
