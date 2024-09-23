@@ -12,7 +12,7 @@ builder:
       .
 
 # build all packages
-packages:
+packages: builder
     ./resources/generate_packages_dockerfile > Dockerfile.packages
 
     docker build \
@@ -30,7 +30,7 @@ packages:
     repo-add custom.db.tar.gz *.pkg.tar.*
 
 # build a specific package
-package package:
+package package: builder
     ./resources/generate_package_dockerfile "{{ package }}" > "Dockerfile.{{ package }}"
 
     docker build \
