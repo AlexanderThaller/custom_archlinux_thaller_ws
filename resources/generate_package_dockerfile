@@ -21,7 +21,7 @@ FROM builder AS ${Package}
 RUN git clone "https://aur.archlinux.org/${Package}.git" && \\
   cd "${Package}" && \\
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \\
-  cp *.pkg.tar.xz /output
+  cp *.pkg.tar.zst /output
 
 EOF
 fi
