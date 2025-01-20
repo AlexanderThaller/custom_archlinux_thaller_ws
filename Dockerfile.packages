@@ -10,12 +10,6 @@ RUN git clone "https://aur.archlinux.org/fastmod.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
-FROM builder AS garage
-RUN git clone "https://aur.archlinux.org/garage.git" && \
-  cd "garage" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
 FROM builder AS hadolint-bin
 RUN git clone "https://aur.archlinux.org/hadolint-bin.git" && \
   cd "hadolint-bin" && \
@@ -204,7 +198,6 @@ RUN git clone "https://aur.archlinux.org/zfs-utils.git" && \
 FROM builder
 COPY --from=dive-git /output /output
 COPY --from=fastmod /output /output
-COPY --from=garage /output /output
 COPY --from=hadolint-bin /output /output
 COPY --from=hstdb /output /output
 COPY --from=insync /output /output
