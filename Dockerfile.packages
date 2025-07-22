@@ -1,6 +1,6 @@
-FROM builder AS dive-git
-RUN git clone "https://aur.archlinux.org/dive-git.git" && \
-  cd "dive-git" && \
+FROM builder AS carapace
+RUN git clone "https://aur.archlinux.org/carapace.git" && \
+  cd "carapace" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
@@ -76,15 +76,15 @@ RUN git clone "https://aur.archlinux.org/ntpd-rs.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
-FROM builder AS pushgateway
-RUN git clone "https://aur.archlinux.org/pushgateway.git" && \
-  cd "pushgateway" && \
+FROM builder AS paru
+RUN git clone "https://aur.archlinux.org/paru.git" && \
+  cd "paru" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
-FROM builder AS rua
-RUN git clone "https://aur.archlinux.org/rua.git" && \
-  cd "rua" && \
+FROM builder AS pushgateway
+RUN git clone "https://aur.archlinux.org/pushgateway.git" && \
+  cd "pushgateway" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
@@ -128,12 +128,6 @@ RUN git clone "https://aur.archlinux.org/seafile-client.git" && \
     cp *.pkg.tar.* /output && \
     cd .. && \
     rm -rf "seafile-client"
-FROM builder AS snapd
-RUN git clone "https://aur.archlinux.org/snapd.git" && \
-  cd "snapd" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
 FROM builder AS sonarr
 RUN git clone "https://aur.archlinux.org/sonarr.git" && \
   cd "sonarr" && \
@@ -196,7 +190,7 @@ RUN git clone "https://aur.archlinux.org/zfs-utils.git" && \
 
 
 FROM builder
-COPY --from=dive-git /output /output
+COPY --from=carapace /output /output
 COPY --from=fastmod /output /output
 COPY --from=hadolint-bin /output /output
 COPY --from=hstdb /output /output
@@ -209,11 +203,10 @@ COPY --from=nginx-mod-fancyindex /output /output
 COPY --from=ngrok /output /output
 COPY --from=nomino /output /output
 COPY --from=ntpd-rs /output /output
+COPY --from=paru /output /output
 COPY --from=pushgateway /output /output
-COPY --from=rua /output /output
 COPY --from=rustdesk-bin /output /output
 COPY --from=seafile-client /output /output
-COPY --from=snapd /output /output
 COPY --from=sonarr /output /output
 COPY --from=steamcmd /output /output
 COPY --from=teamviewer /output /output

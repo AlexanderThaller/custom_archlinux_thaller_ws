@@ -1,4 +1,4 @@
-dive-git
+carapace
 fastmod
 hadolint-bin
 hstdb
@@ -11,11 +11,10 @@ nginx-mod-fancyindex
 ngrok
 nomino
 ntpd-rs
+paru
 pushgateway
-rua
 rustdesk-bin
 seafile-client
-snapd
 sonarr
 steamcmd
 teamviewer
