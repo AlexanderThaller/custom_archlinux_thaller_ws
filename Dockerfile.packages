@@ -140,33 +140,9 @@ RUN git clone "https://aur.archlinux.org/steamcmd.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
-FROM builder AS teamviewer
-RUN git clone "https://aur.archlinux.org/teamviewer.git" && \
-  cd "teamviewer" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
 FROM builder AS telegraf-bin
 RUN git clone "https://aur.archlinux.org/telegraf-bin.git" && \
   cd "telegraf-bin" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
-FROM builder AS tmux-cssh
-RUN git clone "https://aur.archlinux.org/tmux-cssh.git" && \
-  cd "tmux-cssh" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
-FROM builder AS tmux-xpanes
-RUN git clone "https://aur.archlinux.org/tmux-xpanes.git" && \
-  cd "tmux-xpanes" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
-FROM builder AS uhk-agent-appimage
-RUN git clone "https://aur.archlinux.org/uhk-agent-appimage.git" && \
-  cd "uhk-agent-appimage" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
@@ -209,11 +185,7 @@ COPY --from=rustdesk-bin /output /output
 COPY --from=seafile-client /output /output
 COPY --from=sonarr /output /output
 COPY --from=steamcmd /output /output
-COPY --from=teamviewer /output /output
 COPY --from=telegraf-bin /output /output
-COPY --from=tmux-cssh /output /output
-COPY --from=tmux-xpanes /output /output
-COPY --from=uhk-agent-appimage /output /output
 COPY --from=wsdd /output /output
 COPY --from=zfs-dkms /output /output
 COPY --from=zfs-utils /output /output
