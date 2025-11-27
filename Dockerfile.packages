@@ -46,6 +46,12 @@ RUN git clone "https://aur.archlinux.org/krew.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
+FROM builder AS lightningcss-cli
+RUN git clone "https://aur.archlinux.org/lightningcss-cli.git" && \
+  cd "lightningcss-cli" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
 FROM builder AS nginx-mainline-mod-dav-ext
 RUN git clone "https://aur.archlinux.org/nginx-mainline-mod-dav-ext.git" && \
   cd "nginx-mainline-mod-dav-ext" && \
@@ -174,6 +180,7 @@ COPY --from=insync /output /output
 COPY --from=jackett /output /output
 COPY --from=k6 /output /output
 COPY --from=krew /output /output
+COPY --from=lightningcss-cli /output /output
 COPY --from=nginx-mainline-mod-dav-ext /output /output
 COPY --from=nginx-mod-fancyindex /output /output
 COPY --from=ngrok /output /output
