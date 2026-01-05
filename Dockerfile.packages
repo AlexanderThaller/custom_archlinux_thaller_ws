@@ -4,6 +4,12 @@ RUN git clone "https://aur.archlinux.org/carapace.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
+FROM builder AS claude-code
+RUN git clone "https://aur.archlinux.org/claude-code.git" && \
+  cd "claude-code" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
 FROM builder AS etcd
 RUN git clone "https://aur.archlinux.org/etcd.git" && \
   cd "etcd" && \
@@ -79,12 +85,6 @@ RUN git clone "https://aur.archlinux.org/nomino.git" && \
 FROM builder AS ntpd-rs
 RUN git clone "https://aur.archlinux.org/ntpd-rs.git" && \
   cd "ntpd-rs" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
-FROM builder AS nvidia-gpu-prometheus-exporter
-RUN git clone "https://aur.archlinux.org/nvidia-gpu-prometheus-exporter.git" && \
-  cd "nvidia-gpu-prometheus-exporter" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
@@ -173,6 +173,7 @@ RUN git clone "https://aur.archlinux.org/zfs-utils.git" && \
 
 FROM builder
 COPY --from=carapace /output /output
+COPY --from=claude-code /output /output
 COPY --from=etcd /output /output
 COPY --from=fastmod /output /output
 COPY --from=hadolint-bin /output /output
@@ -186,7 +187,6 @@ COPY --from=nginx-mod-fancyindex /output /output
 COPY --from=ngrok /output /output
 COPY --from=nomino /output /output
 COPY --from=ntpd-rs /output /output
-COPY --from=nvidia-gpu-prometheus-exporter /output /output
 COPY --from=paru /output /output
 COPY --from=pushgateway /output /output
 COPY --from=rustdesk-bin /output /output
