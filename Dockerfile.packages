@@ -4,6 +4,12 @@ RUN git clone "https://aur.archlinux.org/carapace.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
+FROM builder AS etcd
+RUN git clone "https://aur.archlinux.org/etcd.git" && \
+  cd "etcd" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
 FROM builder AS fastmod
 RUN git clone "https://aur.archlinux.org/fastmod.git" && \
   cd "fastmod" && \
@@ -46,12 +52,6 @@ RUN git clone "https://aur.archlinux.org/krew.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
-FROM builder AS lightningcss-cli
-RUN git clone "https://aur.archlinux.org/lightningcss-cli.git" && \
-  cd "lightningcss-cli" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
 FROM builder AS nginx-mainline-mod-dav-ext
 RUN git clone "https://aur.archlinux.org/nginx-mainline-mod-dav-ext.git" && \
   cd "nginx-mainline-mod-dav-ext" && \
@@ -79,6 +79,12 @@ RUN git clone "https://aur.archlinux.org/nomino.git" && \
 FROM builder AS ntpd-rs
 RUN git clone "https://aur.archlinux.org/ntpd-rs.git" && \
   cd "ntpd-rs" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
+FROM builder AS nvidia-gpu-prometheus-exporter
+RUN git clone "https://aur.archlinux.org/nvidia-gpu-prometheus-exporter.git" && \
+  cd "nvidia-gpu-prometheus-exporter" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
@@ -134,12 +140,6 @@ RUN git clone "https://aur.archlinux.org/seafile-client.git" && \
     cp *.pkg.tar.* /output && \
     cd .. && \
     rm -rf "seafile-client"
-FROM builder AS sonarr
-RUN git clone "https://aur.archlinux.org/sonarr.git" && \
-  cd "sonarr" && \
-  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
-  cp *.pkg.tar.zst /output
-
 FROM builder AS steamcmd
 RUN git clone "https://aur.archlinux.org/steamcmd.git" && \
   cd "steamcmd" && \
@@ -173,6 +173,7 @@ RUN git clone "https://aur.archlinux.org/zfs-utils.git" && \
 
 FROM builder
 COPY --from=carapace /output /output
+COPY --from=etcd /output /output
 COPY --from=fastmod /output /output
 COPY --from=hadolint-bin /output /output
 COPY --from=hstdb /output /output
@@ -180,17 +181,16 @@ COPY --from=insync /output /output
 COPY --from=jackett /output /output
 COPY --from=k6 /output /output
 COPY --from=krew /output /output
-COPY --from=lightningcss-cli /output /output
 COPY --from=nginx-mainline-mod-dav-ext /output /output
 COPY --from=nginx-mod-fancyindex /output /output
 COPY --from=ngrok /output /output
 COPY --from=nomino /output /output
 COPY --from=ntpd-rs /output /output
+COPY --from=nvidia-gpu-prometheus-exporter /output /output
 COPY --from=paru /output /output
 COPY --from=pushgateway /output /output
 COPY --from=rustdesk-bin /output /output
 COPY --from=seafile-client /output /output
-COPY --from=sonarr /output /output
 COPY --from=steamcmd /output /output
 COPY --from=telegraf-bin /output /output
 COPY --from=wsdd /output /output

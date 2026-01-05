@@ -1,0 +1,56 @@
+FROM builder as python-vllm
+
+RUN git clone "https://aur.archlinux.org/python-sentencepiece.git" && \
+    cd "python-sentencepiece" && \
+    makepkg \
+    --syncdeps \
+    -sic \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "python-sentencepiece"
+
+RUN git clone "https://aur.archlinux.org/python-gguf.git" && \
+    cd "python-gguf" && \
+    makepkg \
+    --syncdeps \
+    -sic \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "python-gguf"
+
+RUN git clone "https://aur.archlinux.org/python-msgspec.git" && \
+    cd "python-msgspec" && \
+    makepkg \
+    --syncdeps \
+    -sic \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "python-msgspec"
+
+RUN git clone "https://aur.archlinux.org/python-partial-json-parser.git" && \
+    cd "python-partial-json-parser" && \
+    makepkg \
+    --syncdeps \
+    -sc \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "python-partial-json-parser"
+
+RUN git clone "python-prometheus-fastapi-instrumentator" && \
+    cd "python-prometheus-fastapi-instrumentator" && \
+    makepkg \
+    --syncdeps \
+    -sc \
+    --noconfirm && \
+    ls -lah && \
+    cp *.pkg.tar.* /output && \
+    cd .. && \
+    rm -rf "python-prometheus-fastapi-instrumentator"

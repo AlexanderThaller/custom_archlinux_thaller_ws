@@ -1,4 +1,6 @@
 carapace
+claude-code
+etcd
 fastmod
 hadolint-bin
 hstdb
@@ -6,17 +8,16 @@ insync
 jackett
 k6
 krew
-lightningcss-cli
 nginx-mainline-mod-dav-ext
 nginx-mod-fancyindex
 ngrok
 nomino
 ntpd-rs
+nvidia-gpu-prometheus-exporter
 paru
 pushgateway
 rustdesk-bin
 seafile-client
-sonarr
 steamcmd
 telegraf-bin
 wsdd
