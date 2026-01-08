@@ -1,3 +1,9 @@
+FROM builder AS butane
+RUN git clone "https://aur.archlinux.org/butane.git" && \
+  cd "butane" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
 FROM builder AS carapace
 RUN git clone "https://aur.archlinux.org/carapace.git" && \
   cd "carapace" && \
@@ -172,6 +178,7 @@ RUN git clone "https://aur.archlinux.org/zfs-utils.git" && \
 
 
 FROM builder
+COPY --from=butane /output /output
 COPY --from=carapace /output /output
 COPY --from=claude-code /output /output
 COPY --from=etcd /output /output
