@@ -58,6 +58,12 @@ RUN git clone "https://aur.archlinux.org/k6.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
+FROM builder AS kubescape
+RUN git clone "https://aur.archlinux.org/kubescape.git" && \
+  cd "kubescape" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
 FROM builder AS mkinitcpio-clevis-hook
 RUN git clone "https://aur.archlinux.org/mkinitcpio-clevis-hook.git" && \
   cd "mkinitcpio-clevis-hook" && \
@@ -188,6 +194,7 @@ COPY --from=hstdb /output /output
 COPY --from=insync /output /output
 COPY --from=jackett /output /output
 COPY --from=k6 /output /output
+COPY --from=kubescape /output /output
 COPY --from=mkinitcpio-clevis-hook /output /output
 COPY --from=nginx-mainline-mod-dav-ext /output /output
 COPY --from=nginx-mod-fancyindex /output /output

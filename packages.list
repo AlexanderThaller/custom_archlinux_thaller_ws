@@ -8,6 +8,7 @@ hstdb
 insync
 jackett
 k6
+kubescape
 mkinitcpio-clevis-hook
 nginx-mainline-mod-dav-ext
 nginx-mod-fancyindex
