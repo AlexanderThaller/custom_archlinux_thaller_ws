@@ -100,6 +100,12 @@ RUN git clone "https://aur.archlinux.org/ntpd-rs.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
+FROM builder AS oras
+RUN git clone "https://aur.archlinux.org/oras.git" && \
+  cd "oras" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
 FROM builder AS paru
 RUN git clone "https://aur.archlinux.org/paru.git" && \
   cd "paru" && \
@@ -201,6 +207,7 @@ COPY --from=nginx-mod-fancyindex /output /output
 COPY --from=ngrok /output /output
 COPY --from=nomino /output /output
 COPY --from=ntpd-rs /output /output
+COPY --from=oras /output /output
 COPY --from=paru /output /output
 COPY --from=pushgateway /output /output
 COPY --from=rustdesk-bin /output /output
