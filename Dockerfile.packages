@@ -170,9 +170,21 @@ RUN git clone "https://aur.archlinux.org/steamcmd.git" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
+FROM builder AS teams-for-linux
+RUN git clone "https://aur.archlinux.org/teams-for-linux.git" && \
+  cd "teams-for-linux" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
 FROM builder AS telegraf-bin
 RUN git clone "https://aur.archlinux.org/telegraf-bin.git" && \
   cd "telegraf-bin" && \
+  makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
+  cp *.pkg.tar.zst /output
+
+FROM builder AS tofi
+RUN git clone "https://aur.archlinux.org/tofi.git" && \
+  cd "tofi" && \
   makepkg --syncdeps --noconfirm --clean --skippgpcheck && \
   cp *.pkg.tar.zst /output
 
@@ -220,7 +232,9 @@ COPY --from=pushgateway /output /output
 COPY --from=rustdesk-bin /output /output
 COPY --from=seafile-client /output /output
 COPY --from=steamcmd /output /output
+COPY --from=teams-for-linux /output /output
 COPY --from=telegraf-bin /output /output
+COPY --from=tofi /output /output
 COPY --from=wsdd /output /output
 COPY --from=zfs-dkms /output /output
 COPY --from=zfs-utils /output /output
