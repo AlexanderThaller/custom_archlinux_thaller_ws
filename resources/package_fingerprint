@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Prints a fingerprint for a package that changes whenever the package needs
+# to be rebuilt: the remote HEAD commit of every AUR repository the package
+# build clones, the package's Dockerfile snippet and the builder config.
+
+set -o errexit  # Stop on command failures.
+set -o errtrace # Make sure any error trap is inherited.
+set -o nounset  # Stop when there are undefined variables.
+set -o pipefail # Stop when a command in a pipe failes.
+
+ScriptPath="$(
+  cd -- "$(dirname "$0")" >/dev/null 2>&1
+  pwd -P
+)"
+readonly ScriptPath
+
+readonly Package="${1:?Package name is required.}"
+
+Dockerfile="$("${ScriptPath}/generate_package_dockerfile" "${Package}")"
+readonly Dockerfile
+
+echo "dockerfile $(sha256sum <<<"${Dockerfile}" | cut -d' ' -f1)"
+echo "builder $(cat "${ScriptPath}/../Dockerfile.builder" "${ScriptPath}/makepkg.conf" | sha256sum | cut -d' ' -f1)"
+
+while read -r url; do
+  commit="$(git ls-remote "${url}" HEAD | head -n1 | cut -f1)"
+
+  if [[ -z "${commit}" ]]; then
+    echo "Could not resolve HEAD of ${url}" >&2
+    exit 1
+  fi
+
+  echo "${url} ${commit}"
+done < <(grep -oE 'https://aur\.archlinux\.org/[^"[:space:]]+\.git' <<<"${Dockerfile}" | sort -u)

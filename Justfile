@@ -11,23 +11,9 @@ builder:
       -f "Dockerfile.builder" \
       .
 
-# build all packages
-packages: builder
-    ./resources/generate_packages_dockerfile > Dockerfile.packages
-
-    docker build \
-      -t "packages" \
-      -f "Dockerfile.packages" \
-      .
-
-    rm -rf packages
-
-    id=$(docker create packages) && \
-    docker cp "${id}:/output" packages && \
-    docker rm -v "${id}"
-
-    cd packages && \
-    repo-add custom.db.tar.gz *.pkg.tar.*
+# build outdated packages (args: [--force] [package...])
+packages *args:
+    ./resources/build_packages {{ args }}
 
 # build a specific package
 package package: builder
@@ -45,8 +31,11 @@ sync:
       --delete-after \
       --delay-updates \
       --safe-links \
+      --exclude ".state" \
       "packages/" \
       'root.thaller.ws:/data/archlinux_thaller_ws/custom/'
 
-# build builder image, packages and sync them to remote
-run: builder packages sync
+# build outdated packages and sync them to remote (also if some builds failed)
+run:
+    -./resources/build_packages
+    just sync

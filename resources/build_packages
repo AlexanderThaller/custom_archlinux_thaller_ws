@@ -1,0 +1,206 @@
+#!/usr/bin/env bash
+
+# Builds only the packages from packages.list whose fingerprint (see
+# package_fingerprint) changed since their last successful build.
+#
+# Usage: build_packages [--force] [package...]
+#   --force     rebuild the selected packages even if they are up to date
+#   package...  only consider these packages (default: all in packages.list)
+#
+# Environment:
+#   BUILD_JOBS  number of packages to build in parallel (default: all)
+#
+# Every stale package is built separately. A failed build keeps the
+# previously built files of that package and is retried on the next run; the
+# script exits with a non-zero status after all other packages were updated.
+#
+# Per package state is kept in packages/.state:
+#   <package>.fingerprint  fingerprint of the last successful build
+#   <package>.files        package files produced by that build
+#   <package>.log          log of the last build attempt
+
+set -o errexit  # Stop on command failures.
+set -o errtrace # Make sure any error trap is inherited.
+set -o nounset  # Stop when there are undefined variables.
+set -o pipefail # Stop when a command in a pipe failes.
+
+ScriptPath="$(
+  cd -- "$(dirname "$0")" >/dev/null 2>&1
+  pwd -P
+)"
+readonly ScriptPath
+
+readonly OutputDir="packages"
+readonly StateDir="${OutputDir}/.state"
+
+Force=false
+Selected=()
+for arg in "$@"; do
+  case "${arg}" in
+  --force) Force=true ;;
+  *) Selected+=("${arg}") ;;
+  esac
+done
+readonly Force
+
+mapfile -t Wanted < <(grep -vE '^[[:space:]]*(#|$)' packages.list)
+readonly Wanted
+
+for package in "${Selected[@]}"; do
+  if ! printf '%s\n' "${Wanted[@]}" | grep -qxF "${package}"; then
+    echo "${package} is not in packages.list" >&2
+    exit 1
+  fi
+done
+
+if [[ ${#Selected[@]} -eq 0 ]]; then
+  Selected=("${Wanted[@]}")
+fi
+readonly Selected
+
+WorkDir="$(mktemp -d)"
+readonly WorkDir
+trap 'rm -rf "${WorkDir}"' EXIT
+
+mkdir -p "${StateDir}"
+
+is_up_to_date() {
+  local package="$1"
+  local files="${StateDir}/${package}.files"
+
+  cmp -s "${WorkDir}/${package}.fingerprint" "${StateDir}/${package}.fingerprint" || return 1
+  [[ -s "${files}" ]] || return 1
+
+  while read -r file; do
+    [[ -f "${OutputDir}/${file}" ]] || return 1
+  done <"${files}"
+}
+
+Stale=()
+for package in "${Selected[@]}"; do
+  "${ScriptPath}/package_fingerprint" "${package}" >"${WorkDir}/${package}.fingerprint"
+
+  if [[ "${Force}" == true ]] || ! is_up_to_date "${package}"; then
+    echo "stale:      ${package}"
+    Stale+=("${package}")
+  else
+    echo "up to date: ${package}"
+  fi
+done
+readonly Stale
+
+# Builds a single package into ${WorkDir}/output/<package>. Called in a
+# context where errexit is ignored, so every step is checked explicitly.
+build_package() {
+  local package="$1"
+  local dockerfile="${WorkDir}/${package}.Dockerfile"
+  local image="packages-${package}"
+  local id
+
+  "${ScriptPath}/generate_package_dockerfile" "${package}" >"${dockerfile}" || return 1
+
+  docker build \
+    --progress=plain \
+    -t "${image}" \
+    -f "${dockerfile}" \
+    . || return 1
+
+  id="$(docker create "${image}")" || return 1
+  docker cp "${id}:/output" "${WorkDir}/output/${package}" || return 1
+  docker rm -v "${id}" >/dev/null || return 1
+  docker rmi "${image}" >/dev/null || return 1
+}
+
+Failed=()
+
+if [[ ${#Stale[@]} -gt 0 ]]; then
+  docker build \
+    --pull \
+    --no-cache \
+    -t "builder" \
+    -f "Dockerfile.builder" \
+    .
+
+  mkdir -p "${WorkDir}/output"
+
+  Jobs="${BUILD_JOBS:-${#Stale[@]}}"
+  readonly Jobs
+
+  for package in "${Stale[@]}"; do
+    while [[ $(jobs -rp | wc -l) -ge ${Jobs} ]]; do
+      wait -n || true
+    done
+
+    echo "building:   ${package}"
+    (build_package "${package}" && touch "${WorkDir}/${package}.ok") \
+      >"${StateDir}/${package}.log" 2>&1 &
+  done
+  wait
+
+  for package in "${Stale[@]}"; do
+    if [[ -f "${WorkDir}/${package}.ok" ]]; then
+      mapfile -t files < <(find "${WorkDir}/output/${package}" -maxdepth 1 -type f -name '*.pkg.tar.*' -printf '%f\n' | sort)
+    else
+      files=()
+    fi
+
+    if [[ ${#files[@]} -eq 0 ]]; then
+      echo "failed:     ${package} (log: ${StateDir}/${package}.log)" >&2
+      Failed+=("${package}")
+      continue
+    fi
+
+    if [[ -f "${StateDir}/${package}.files" ]]; then
+      while read -r file; do
+        rm -f "${OutputDir:?}/${file}"
+      done <"${StateDir}/${package}.files"
+    fi
+
+    for file in "${files[@]}"; do
+      cp "${WorkDir}/output/${package}/${file}" "${OutputDir}/${file}"
+    done
+
+    printf '%s\n' "${files[@]}" >"${StateDir}/${package}.files"
+    cp "${WorkDir}/${package}.fingerprint" "${StateDir}/${package}.fingerprint"
+    echo "built:      ${package}"
+  done
+else
+  echo "All packages are up to date."
+fi
+
+# Only a full run knows about every package, so only then clean up packages
+# removed from packages.list and files not produced by any package.
+if [[ ${#Selected[@]} -eq ${#Wanted[@]} ]]; then
+  for state in "${StateDir}"/*.files; do
+    [[ -e "${state}" ]] || continue
+    package="$(basename "${state}" .files)"
+
+    if ! printf '%s\n' "${Wanted[@]}" | grep -qxF "${package}"; then
+      echo "removing:   ${package}"
+      rm -f "${StateDir}/${package}.files" "${StateDir}/${package}.fingerprint"
+    fi
+  done
+
+  cat "${StateDir}"/*.files 2>/dev/null | sort -u >"${WorkDir}/keep"
+  find "${OutputDir}" -maxdepth 1 -type f -name '*.pkg.tar.*' -printf '%f\n' | while read -r file; do
+    if ! grep -qxF "${file}" "${WorkDir}/keep"; then
+      echo "deleting:   ${file}"
+      rm -f "${OutputDir:?}/${file}"
+    fi
+  done
+fi
+
+# Regenerate the repository database from scratch.
+rm -f "${OutputDir}"/custom.{db,files}{,.tar.gz,.tar.gz.old}
+mapfile -t Files < <(find "${OutputDir}" -maxdepth 1 -type f -name '*.pkg.tar.*' -printf '%f\n' | sort)
+if [[ ${#Files[@]} -gt 0 ]]; then
+  (
+    cd "${OutputDir}"
+    repo-add custom.db.tar.gz "${Files[@]}"
+  )
+fi
+
+if [[ ${#Failed[@]} -gt 0 ]]; then
+  echo "Failed to build: ${Failed[*]}" >&2
+  exit 1
+fi
